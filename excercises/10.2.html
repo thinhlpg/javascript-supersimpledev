@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Ex 10.2</title>
+</head>
+
+<body>
+    <div id="receipt"></div>
+    <script>
+        cartArray = [
+            { name: 'Apple', price: 4, quantity: 2 },
+            { name: 'Orange', price: 3, quantity: 3 }
+        ]
+
+        function cartTotal(cart) {
+            let total = 0
+            cart.forEach(function (item) {
+                total += item.price * item.quantity
+            });
+            return total
+        }
+
+        function displayReceipt(cart) {
+            const receipt = document.getElementById('receipt')
+            receipt.innerHTML = ''
+
+            cart.forEach(function (item) {
+                const element = document.createElement('div')
+                element.innerText = item.name + ' $' + item.price + ' * ' + item.quantity
+                receipt.appendChild(element)
+            })
+
+            const element = document.createElement('div')
+            element.innerText = 'Cart total = $' + cartTotal(cart)
+            receipt.appendChild(element)
+        }
+
+        displayReceipt(cartArray)
+    </script>
+</body>
+
+</html>
