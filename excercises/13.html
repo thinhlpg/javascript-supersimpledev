@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 13</title>
+</head>
+
+<body>
+    <script>
+        // 13.1
+        function max(arr) {
+            let maxValue = arr[0]
+            arr.forEach(element => {
+                if (element > maxValue) {
+                    maxValue = element
+                }
+            });
+
+            return maxValue
+        }
+
+        function min(arr) {
+            let minValue = arr[0]
+            arr.forEach(element => {
+                if (element < minValue) {
+                    minValue = element
+                }
+            });
+            return minValue
+        }
+
+        arr = [1, 5, -2, 4, 3, 5, 0]
+        console.log(max(arr))
+        console.log(min(arr))
+
+        // 13.2
+        function pickApples(fruits) {
+            let appleCount = 0
+            fruits = fruits.filter(function (fruit) {
+                if (fruit === 'apple' && appleCount < 2) {
+                    appleCount += 1
+                    return false
+                }
+                return true
+            })
+            return fruits
+        }
+
+        function pickFruits(fruits) {
+            let appleCount = 0
+            let orangeCount = 0
+            fruits = fruits.filter(function (fruit) {
+                if (fruit === 'apple' && appleCount < 2) {
+                    appleCount += 1
+                    return false
+                }
+                else if (fruit === 'orange' && orangeCount < 1) {
+                    orangeCount += 1
+                    return false
+                }
+                return true
+            })
+            return fruits
+        }
+
+        let fruits = ['cherry', 'apple', 'orange', 'apple', 'banana', 'apple', 'orange']
+        console.log(pickApples(fruits))
+        console.log(pickFruits(fruits))
+
+        // 13.3
+        function pickLastApples(fruits) {
+            let appleCount = 0
+            fruits = fruits.reverse()
+            fruits = fruits.filter(function (fruit) {
+                if (fruit === 'apple' && appleCount < 2) {
+                    appleCount += 1
+                    return false
+                }
+                return true
+            })
+            return fruits.reverse()
+        }
+
+        console.log(pickLastApples(fruits))
+
+    </script>
+</body>
+
+</html>

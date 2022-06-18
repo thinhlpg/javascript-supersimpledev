@@ -16,7 +16,7 @@
     <div id="todo-list"></div>
 
     <script>
-        const todos = [{
+        let todos = [{
             title: 'Get groceries',
             dueDate: '2021-10-04',
             id: 'id1'
@@ -35,6 +35,13 @@
         function deleteTodo(event) {
             const deleteButton = event.target
             const idToDelete = deleteButton.id
+
+            todos = todos.filter(function (todo) {
+                //Keep the todo that is not the idToDelete
+                return todo.id !== idToDelete
+            })
+
+            render()
         }
 
         function render() {
@@ -61,7 +68,7 @@
             const textbox = document.getElementById('todo-title')
             const title = textbox.value
 
-            const id = new Date().getTime()
+            const id = '' + new Date().getTime()
 
             const datePicker = document.getElementById('date-picker')
             const dueDate = datePicker.value
