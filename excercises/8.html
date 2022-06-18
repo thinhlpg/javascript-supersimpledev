@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 8</title>
+</head>
+
+<body>
+    <button id="todo-button" onclick="changeDone()">Sờ em đi</button>
+    <div id="counter">0</div>
+    <button id="up-button" onclick="increaseCount()">Up</button>
+    <button id="down-button" onclick="decreaseCount()">Down</button>
+    <br>
+    <input id="todo-input" type="text">
+    <button id="add-todo-button" onclick="addTodo()">Add</button>
+    <script>
+        // 8.1
+        function changeDone() {
+            document.getElementById('todo-button').innerText = 'Done'
+        }
+
+        // 8.2
+        function increaseCount() {
+            count = document.getElementById('counter').innerText
+            count = Number(count) + 1
+            document.getElementById('counter').innerText = count
+        }
+
+        // 8.3
+        function decreaseCount() {
+            count = document.getElementById('counter').innerText
+            count = Number(count) - 1
+            document.getElementById('counter').innerText = count
+        }
+
+        // 8.4
+        function addTodo() {
+            todo = document.getElementById('todo-input').value
+            let todoDiv = document.createElement('div')
+            todoDiv.innerText = todo
+            document.body.appendChild(todoDiv)
+        }
+    </script>
+</body>
+
+</html>
