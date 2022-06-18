@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9.2</title>
+</head>
+
+<body>
+    <input id="entry" type="text">
+    <button onclick="inchToCm()">Convert to cm</button>
+    <button onclick="cmToInch()">Convert to inch</button>
+
+    <script>
+        const entry = document.getElementById('entry')
+
+        function inchToCm() {
+            const inchValue = entry.value
+            const cmValue = +inchValue * 2.54
+            const result = document.createElement('div')
+            result.innerText = cmValue
+            document.body.appendChild(result)
+        }
+
+        function cmToInch() {
+            const mValue = Number(entry.value)
+            const inchValue = +cmValue / 2.54
+            const result = document.createElement('div')
+            result.innerText = inchValue;
+            document.body.appendChild(result)
+        }
+    </script>
+</body>
+
+</html>
