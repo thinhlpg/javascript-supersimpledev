@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('Hello')
+
+        // 7.1
+        function toUpper(stringArray) {
+            let upperArray = []
+            stringArray.forEach(function (value) {
+                upperArray.push(value.toUpperCase())
+            })
+            console.log(upperArray)
+        }
+
+        toUpper(['hello', 'world'])
+
+        // 7.2
+        function arrayDouble(stringArray) {
+            let doubleArray = []
+            stringArray.forEach(function (value) {
+                doubleArray.push(value)
+                doubleArray.push(value)
+            })
+
+            console.log(doubleArray)
+        }
+
+        arrayDouble(['bark', 'meo'])
+
+
+        // 7.3
+        function arraySum(arr) {
+            let sum = 0
+            arr.forEach(function (value) {
+                sum += value
+            })
+            console.log(sum)
+        }
+
+        arraySum([1, 2, 3])
+        arraySum([5, -2, 7, 0])
+    </script>
+</body>
+
+</html>
