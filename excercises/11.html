@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 11</title>
+</head>
+
+<body>
+    <script>
+        const cart = { Apple: 3, Orange: 4, Egg: 2 }
+
+        let total = 0
+
+
+        function createCart(cart) {
+            itemNames = Object.keys(cart)
+            itemNames.forEach(function (item) {
+                const itemPrice = cart[item]
+                const element = document.createElement('div')
+                element.innerText = item + ' $' + itemPrice
+                const addButton = document.createElement('button')
+                addButton.innerText = 'Add'
+                addButton.onclick = function (value) {
+                    total += itemPrice
+                    console.log(total)
+                }
+                element.appendChild(addButton)
+
+                document.body.appendChild(element)
+            });
+        }
+
+        createCart(cart)
+    </script>
+</body>
+
+</html>
