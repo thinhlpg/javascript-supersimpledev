@@ -167,11 +167,13 @@
                     const textbox = document.createElement('input')
                     textbox.type = 'text'
                     textbox.id = 'edit-title-' + todo.id
+                    textbox.value = todo.title
                     element.appendChild(textbox)
 
                     const datePicker = document.createElement('input')
                     datePicker.type = 'date'
                     datePicker.id = 'edit-date-' + todo.id
+                    datePicker.value = todo.dueDate
                     element.appendChild(datePicker)
 
                     const updateButton = document.createElement('button')
