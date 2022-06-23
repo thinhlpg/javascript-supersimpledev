@@ -69,14 +69,32 @@
         }
 
         // Update a todo
-        function changeTodo(idToUpdate, checkboxValue) {
+        function toggleTodo(idToCheck, checkboxValue) {
             todos.forEach(todo => {
-                if (todo.id === idToUpdate) {
+                if (todo.id === idToCheck) {
                     todo.isDone = checkboxValue
                 }
             });
 
             saveTodos()
+        }
+
+        function setEditing(todoId) {
+            todos.forEach(todo => {
+                if (todo.id === todoId) {
+                    todo.isEditing = true;
+                }
+            });
+        }
+
+        function updateTodo(todoId, newTitle, newDate) {
+            todos.forEach(todo => {
+                if (todo.id === todoId) {
+                    todo.title = newTitle
+                    todo.dueDate = newDate
+                    todo.isEditing = false
+                }
+            });
         }
 
         function saveTodos() {
@@ -85,7 +103,6 @@
 
         // CONTROLLER SECTION
 
-        render();
         function addTodo() {
             const textbox = document.getElementById('todo-title')
             const title = textbox.value
@@ -106,12 +123,34 @@
             render()
         }
 
-        function updateTodo(event) {
+        function checkTodo(event) {
             const checkbox = event.target
-            const idToUpdate = checkbox.dataset.todoId
+            const idToCheck = checkbox.dataset.todoId
             const checkboxValue = checkbox.checked
 
-            changeTodo(idToUpdate, checkboxValue)
+            toggleTodo(idToCheck, checkboxValue)
+            render()
+        }
+
+        function onEdit(event) {
+            const editButton = event.target
+            const todoId = editButton.dataset.todoId
+
+            setEditing(todoId)
+            render()
+        }
+
+        function onUpdate(event) {
+            const updateButton = event.target
+            const todoId = updateButton.dataset.todoId
+
+            const textbox = document.getElementById('edit-title-' + todoId)
+            const newTitle = textbox.value
+
+            const datePicker = document.getElementById('edit-date-' + todoId)
+            const newDate = datePicker.value
+
+            updateTodo(todoId, newTitle, newDate)
             render()
         }
 
@@ -123,31 +162,59 @@
 
             todos.forEach(function (todo) {
                 const element = document.createElement('div')
-                element.innerText = todo.title + ' ' + todo.dueDate
 
-                const checkbox = document.createElement('input')
-                checkbox.type = 'checkbox'
-                checkbox.style = 'margin-right: 12px'
-                checkbox.onchange = updateTodo
-                checkbox.dataset.todoId = todo.id
-                if (todo.isDone) {
-                    checkbox.checked = true
-                    element.style = 'text-decoration: line-through'
+                if (todo.isEditing) {
+                    const textbox = document.createElement('input')
+                    textbox.type = 'text'
+                    textbox.id = 'edit-title-' + todo.id
+                    element.appendChild(textbox)
+
+                    const datePicker = document.createElement('input')
+                    datePicker.type = 'date'
+                    datePicker.id = 'edit-date-' + todo.id
+                    element.appendChild(datePicker)
+
+                    const updateButton = document.createElement('button')
+                    updateButton.innerText = 'Update'
+                    updateButton.dataset.todoId = todo.id
+                    updateButton.onclick = onUpdate
+                    element.appendChild(updateButton)
+
+                } else {
+                    element.innerText = todo.title + ' ' + todo.dueDate
+
+                    const checkbox = document.createElement('input')
+                    checkbox.type = 'checkbox'
+                    checkbox.style = 'margin-right: 12px'
+                    checkbox.onchange = checkTodo
+                    checkbox.dataset.todoId = todo.id
+                    if (todo.isDone) {
+                        checkbox.checked = true
+                        element.style = 'text-decoration: line-through'
+                    }
+                    element.prepend(checkbox)
+
+                    const editButton = document.createElement('button')
+                    editButton.innerText = 'Edit'
+                    editButton.style = 'margin-left: 12px'
+                    editButton.onclick = onEdit
+                    editButton.dataset.todoId = todo.id
+                    element.appendChild(editButton)
+
+                    const deleteButton = document.createElement('button')
+                    deleteButton.innerText = 'Delete'
+                    deleteButton.style = 'margin-left: 12px'
+                    deleteButton.onclick = deleteTodo
+                    deleteButton.dataset.todoId = todo.id
+                    element.appendChild(deleteButton)
                 }
-                element.prepend(checkbox)
-
-                const deleteButton = document.createElement('button')
-                deleteButton.innerText = 'Delete'
-                deleteButton.style = 'margin-left: 12px'
-                deleteButton.onclick = deleteTodo
-                deleteButton.dataset.todoId = todo.id
-                element.appendChild(deleteButton)
 
                 const todoList = document.getElementById('todo-list');
                 todoList.appendChild(element)
             })
         }
 
+        render()
     </script>
 </body>
 
